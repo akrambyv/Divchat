@@ -7,10 +7,10 @@ export class ProfileEntity extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ nullable: true })
     fullName: string;
 
-    @Column()
+    @Column({ nullable: true })
     bio: string;
 
     @Column({ default: 0 })
@@ -22,7 +22,7 @@ export class ProfileEntity extends BaseEntity {
     @Column({ default: 0 })
     postCount: number;
 
-    @Column()
+    @Column({nullable: true})
     imageId: number;
 
     @Column()
@@ -35,7 +35,7 @@ export class ProfileEntity extends BaseEntity {
     })
     image: ImageEntity;
 
-    @OneToOne(() => UserEntity, (user) => user.profile)
+    @OneToOne(() => UserEntity, (user) => user.profile, {onDelete: 'CASCADE'})
     @JoinColumn({
         name: 'userId',
         referencedColumnName: 'id',
